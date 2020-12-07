@@ -1,0 +1,107 @@
+<h1 class="mt-4">Vendedores</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{mensagemSucesso}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{mensagemErro}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)='novoCadastro()'><i class="fa fa-plus" ></i> Novo</button>
+         </div>
+    </div>
+    <div class="row mt-2" >
+        <div class="col-md-2">
+            <label>ID:</label>
+            <div class="row ml-4">
+                <input type="text" class="form-control" [(ngModel)]="tempFiltroId" />
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-10">
+            <label>Nome:</label>
+            <div class="row ml-4">
+                <input type="text" class="form-control" [(ngModel)]="tempFiltroNome" />
+            </div>
+        </div>
+    </div>    
+    <div class="row ml-4 mt-2">
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)='definirFiltro()'><i class="fa fa-search" ></i> Pesquisar</button>
+         </div>
+         <div class="col-md-2">
+             <button class="btn btn-secondary" (click)='limparFiltro()'><i class="fa fa-eraser" ></i> Limpar</button>
+          </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        <br>
+            <table class="table table-condensed"> 
+                <thead>
+                    <tr>
+                      <th (click)="ordenar('id')">
+                          ID
+                          <span *ngIf="chave =='id'">{{sentido ? '▲' : '▼'}}</span>             
+                          <span *ngIf="chave !='id'"><i  class='fa fa-sort'> </i></span>
+                      </th>
+                      <th (click)="ordenar('nome')">
+                          Nome
+                          <span *ngIf="chave =='nome'">{{sentido ? '▲' : '▼'}}</span>              
+                          <span *ngIf="chave !='nome'"><i  class='fa fa-sort'> </i></span>                         
+                      </th>
+                      <th (click)="ordenar('cpf')">
+                          CPF
+                          <span *ngIf="chave =='cpf'">{{sentido ? '▲' : '▼'}}</span>             
+                          <span *ngIf="chave !='cpf'"><i  class='fa fa-sort'> </i></span>
+                      </th>
+                      <th>Latitude</th>
+                      <th>Longitude</th>
+                      <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vendedor of filtro(vendedores) | orderBy: chave : sentido :comparador">
+                        <td>{{ vendedor.id }}</td>
+                        <td>{{ vendedor.nome }}</td>
+                        <td>{{ vendedor.cpf }}</td>
+                        <td>{{ vendedor.latitude }}</td>
+                        <td>{{ vendedor.longitude }}</td>
+                        <td>
+                            <button class="btn btn-primary"  routerLink="/vendedores-form/{{vendedor.id}}"><i class="fa fa-edit"></i> </button>
+                            <button class="btn btn-danger"  data-toggle="modal" data-target="#modalDelecao" (click)='preparaDelecao(vendedor)'>
+                                <i class="fa fa-trash"></i> 
+                            </button>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+                <div class="modal-body" *ngIf="this.vendedorDelecao">
+                    Voce quer excluir {{this.vendedorDelecao.nome}}?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarVendedor()" data-dismiss="modal">Confirmar</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

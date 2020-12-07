@@ -1,0 +1,63 @@
+<h1 class="mt-4">Arquivos</h1>
+    <div class="container">
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Cliente</li>
+    </ol>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <input  #File type="file"   (change)="definirArquivosCliente($event)" /><br>
+                <button type="submit" class="btn btn-secondary mt-2"data-toggle="modal" data-target="#modalDelecao" [disabled]="File.value==''" (click)="importarClientes()"> 
+                    Importar Clientes
+                </button>
+                <button type="submit" class="btn btn-secondary mt-2 ml-2"   (click)="exportarClientes()"> 
+                    Exportar Clientes
+                </button>
+            </div>
+        </div>
+    </div>
+    <ol class="breadcrumb mb-4 mt-3">
+        <li class="breadcrumb-item active">Vendedor</li>
+    </ol>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <input  #File1 type="file"   (change)="definirArquivosVendedor($event)" /><br>
+                <button type="submit" class="btn btn-secondary mt-2"data-toggle="modal" data-target="#modalDelecao" [disabled]="File1.value==''" (click)="importarVendedores()"> 
+                    Importar Vendedores
+                </button>
+                
+                <button type="submit"  class="btn btn-secondary mt-2 ml-2"  (click)="exportarVendedores()"> 
+                    Exportar Vendedores
+                </button>
+            </div>
+        </div>
+    </div>
+    <ol class="breadcrumb mb-4 mt-3">
+        <li class="breadcrumb-item active">Carteiras distribuidas</li>
+    </ol>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit"  class="btn btn-secondary mt-2 ml-2"  (click)="exportarCarteiraClientes()"> 
+                    Exportar Carteira Clientes
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Menssagem</h4>
+                </div>
+                <div class="modal-body" *ngIf="this.mensagem">
+                    {{this.mensagem}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

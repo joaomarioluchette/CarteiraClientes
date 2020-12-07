@@ -1,0 +1,69 @@
+<h1 class="mt-4">Vendedores</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">{{vendedor.id?'Edição':'Cadastro'}}</li>
+</ol>
+<div class="container">
+    <form #vendedorForm="ngForm" (ngSubmit)="salvarVendedor()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success">
+                    Vendedor {{vendedor.id?'Salvo':'Cadastrado'}} com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{error}}
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="vendedor.id">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="text" class="form-control" disabled="true" [ngModel]="vendedor.id" name="id"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" class="form-control" [(ngModel)]="vendedor.nome" name="nome"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>CPF:</label>
+                    <input type="text" class="form-control" [(ngModel)]="vendedor.cpf" name="cpf"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Latitude:</label>
+                    <input type="text" class="form-control"[(ngModel)]="vendedor.latitude" name="latitude"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Longitude:</label>
+                    <input type="text" class="form-control"[(ngModel)]="vendedor.longitude" name="longitude"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success" *ngIf="!vendedor.id">
+                    <i class="fa fa-save"></i> Salvar
+                </button>                
+                <button type="submit" class="btn btn-primary" *ngIf="vendedor.id">
+                    <i class="fa fa-sync-alt"></i> Atualizar
+                </button>
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarLista()" >
+                    <i class="fa fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
